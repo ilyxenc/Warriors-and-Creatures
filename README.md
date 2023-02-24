@@ -1,2 +1,2 @@
-# Warriors-and-creatures
-Platformer game
+# Warriors and Creatures
+Platformer game with JavaScript and HTML Canvas

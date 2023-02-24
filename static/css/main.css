@@ -1,0 +1,50 @@
+* {
+  padding: 0;
+  margin: 0;
+  color: #FFF;
+  font-family: "Rubik", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  outline: none;
+  -webkit-text-size-adjust: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  background: black;
+  height: -moz-available;
+  height: fill-available;
+  height: -webkit-fill-available;
+}
+
+body {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-width: 320px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  overflow: hidden;
+  overflow-x: hidden !important;
+  overflow-y: scroll;
+  min-height: -moz-available;
+  min-height: fill-available;
+  min-height: -webkit-fill-available;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  box-sizing: border-box;
+  max-width: 100%;
+}/*# sourceMappingURL=main.css.map */
