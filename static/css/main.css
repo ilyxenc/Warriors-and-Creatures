@@ -59,6 +59,9 @@ canvas {
   #control {
     display: flex;
     gap: 2rem;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
   }
   #control button {
     background: transparent;
@@ -67,10 +70,16 @@ canvas {
     font: inherit;
     cursor: pointer;
     outline: inherit;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
   }
   #control .arrow {
     width: 50px;
     height: auto;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
   }
   #control .arrowLeft {
     transform: rotate(-90deg);
