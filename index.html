@@ -1,6 +1,6 @@
 <html lang="ru">
 <head>
-    <title>WAC</title>
+    <title>First Demo Game</title>
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,6 +15,20 @@
     <link type="text/css" rel="stylesheet" href="./static/css/main.css">
 </head>
 <body>
+    <div class="modal">
+        <p>
+            This is demo game where you need to walk between rooms.<br /><br />
+            <b>Close</b> this modal window to start.
+        </p>
+    </div>
+    <script>
+        const modal = document.querySelector(".modal");
+
+        modal.addEventListener("click", () => {
+            modal.remove();
+        });
+    </script>
+
     <canvas id="canvas"></canvas>
     <div id="control">
         <button data-type="left" class="arrow arrowLeft"></button>
