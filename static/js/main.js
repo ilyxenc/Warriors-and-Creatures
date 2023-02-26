@@ -9,6 +9,59 @@ let collisionBlocks;
 let background;
 let doors;
 
+const player = new Player({
+    imageSrc: "./static/images/king/idle.png",
+    frameRate: 11,
+    animations: {
+        idleRight: {
+            frameRate: 11,
+            frameBuffer: 2,
+            loop: true,
+            imageSrc: "./static/images/king/idle.png",
+        },
+        idleLeft: {
+            frameRate: 11,
+            frameBuffer: 2,
+            loop: true,
+            imageSrc: "./static/images/king/idleLeft.png",
+        },
+        runRight: {
+            frameRate: 8,
+            frameBuffer: 4,
+            loop: true,
+            imageSrc: "./static/images/king/runRight.png",
+        },
+        runLeft: {
+            frameRate: 8,
+            frameBuffer: 4,
+            loop: true,
+            imageSrc: "./static/images/king/runLeft.png",
+        },
+        enterDoor: {
+            frameRate: 8,
+            frameBuffer: 4,
+            loop: false,
+            imageSrc: "./static/images/king/enterDoor.png",
+            onComplete: () => {
+                gsap.to(overlay, {
+                    opacity: 1,
+                    onComplete: () => {
+                        level++;
+
+                        if (level === 4) { level = 1; }
+                        levels[level].init();
+                        player.switchSprite("idleRight");
+                        player.preventInput = false;
+                        gsap.to(overlay, {
+                            opacity: 0,
+                        });
+                    },
+                })
+            },
+        },
+    }
+});
+
 let level = 1;
 const levels = {
     1: {
@@ -82,6 +135,7 @@ const levels = {
             player.collisionBlocks = collisionBlocks;
             player.position.x = 750;
             player.position.y = 230;
+            if (player.currentAnimation) player.currentAnimation.isActive = false
 
             background = new Sprite({
                 position: {
@@ -108,59 +162,6 @@ const levels = {
     }
 }
 
-const player = new Player({
-    imageSrc: "./static/images/king/idle.png",
-    frameRate: 11,
-    animations: {
-        idleRight: {
-            frameRate: 11,
-            frameBuffer: 2,
-            loop: true,
-            imageSrc: "./static/images/king/idle.png",
-        },
-        idleLeft: {
-            frameRate: 11,
-            frameBuffer: 2,
-            loop: true,
-            imageSrc: "./static/images/king/idleLeft.png",
-        },
-        runRight: {
-            frameRate: 8,
-            frameBuffer: 4,
-            loop: true,
-            imageSrc: "./static/images/king/runRight.png",
-        },
-        runLeft: {
-            frameRate: 8,
-            frameBuffer: 4,
-            loop: true,
-            imageSrc: "./static/images/king/runLeft.png",
-        },
-        enterDoor: {
-            frameRate: 8,
-            frameBuffer: 4,
-            loop: false,
-            imageSrc: "./static/images/king/enterDoor.png",
-            onComplete: () => {
-                gsap.to(overlay, {
-                    opacity: 1,
-                    onComplete: () => {
-                        if (level !== levels.length) level++;
-                        else level = 1;
-                        
-                        levels[level].init();
-                        player.switchSprite("idleRight");
-                        player.preventInput = false;
-                        gsap.to(overlay, {
-                            opacity: 0,
-                        });
-                    },
-                })
-            },
-        },
-    }
-});
-
 const keys = {
     w: {
         pressed: false,
@@ -179,20 +180,14 @@ const overlay = {
 
 function animate() {
     window.requestAnimationFrame(animate);
-    c.fillStyle = "white";
-    c.fillRect(0, 0, canvas.width, canvas.height);
 
     background.draw();
-    collisionBlocks.forEach(collisionBlock => {
-        collisionBlock.draw();
-    });
 
     doors.forEach(door => {
         door.draw();
     });
 
     player.handleInput(keys);
-
     player.draw();
     player.update();
 
